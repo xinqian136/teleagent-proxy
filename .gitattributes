@@ -1,0 +1,22 @@
+# 换行符与编码规范
+* text=auto eol=lf
+
+# Windows 批处理必须 CRLF，否则 cmd.exe 可能解析异常
+*.cmd text eol=crlf
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# 二进制
+*.exe binary
+*.dll binary
+*.zip binary
+*.asar binary
+*.png binary
+*.jpg binary
+
+# 文档
+*.md text eol=lf
+*.json text eol=lf
+*.py text eol=lf
+*.js text eol=lf
+*.go text eol=lf
