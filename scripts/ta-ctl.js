@@ -29,8 +29,10 @@ const HOME = process.env.USERPROFILE || os.homedir();
 const TA_DATA = path.join(HOME, '.local', 'share', 'TeleAgent');
 
 const RUNTIMES = path.join(TA_DATA, 'runtimes');
-const NODE = path.join(RUNTIMES, 'node', 'node.exe');
-const PYTHON = path.join(RUNTIMES, 'python', 'python.exe');
+// TA_NODE 可覆盖 node 路径。TeleAgent 启动时会杀掉其 runtimes/ 目录下的进程，
+// 所以想活过 App 重启就要指定别的 node（如 WorkBuddy 自带的）。
+const NODE = process.env.TA_NODE || path.join(RUNTIMES, 'node', 'node.exe');
+const PYTHON = process.env.TA_PYTHON || path.join(RUNTIMES, 'python', 'python.exe');
 const KERNEL_EXE = path.join(RUNTIMES, 'super-agent-code', 'bin', 'TeleAgent.exe');
 
 const PROFILES = {
@@ -204,7 +206,7 @@ function startViaTask(p, env) {
   if (!fs.existsSync(launcher)) return false;
 
   // TR 里只保留一层引号：launch.cmd 及其参数
-  const tr = `"${launcher}" ${p.port} ${env.TA_API_KEY} ${env.TA_HOST} ${p.key}`;
+  const tr = `"${launcher}" ${p.port} ${env.TA_API_KEY} ${env.TA_HOST} ${p.key} "${NODE}"`;
 
   try {
     try { execSync(`schtasks /Delete /TN "${taskName}" /F`, { stdio: 'ignore', shell: 'cmd.exe' }); } catch (_) {}
@@ -388,7 +390,7 @@ function cmdAutostart(sub, which) {
       console.error(`[✗] 缺少启动包装脚本：${launcher}`);
       continue;
     }
-    const tr = `"${launcher}" ${p.port} ${getApiKey()} ${process.env.TA_HOST || '127.0.0.1'} ${w}`;
+    const tr = `"${launcher}" ${p.port} ${getApiKey()} ${process.env.TA_HOST || '127.0.0.1'} ${w} "${NODE}"`;
     try {
       try { execSync(`schtasks /Delete /TN "${name}" /F`, { stdio: 'ignore', shell: 'cmd.exe' }); } catch (_) {}
       execSync(
