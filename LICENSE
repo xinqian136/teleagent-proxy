@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2026 teleagent-proxy contributors
+Copyright (c) 2026 xinqian136
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -19,11 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-⚠️ 合规提示
-
-本项目用于把已安装的 TeleAgent 客户端的模型能力接入自有工具链。
-使用者需自行确保符合所使用服务商的服务条款。使用本项目造成的账号风险
-由使用者自行承担。
